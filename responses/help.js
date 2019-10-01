@@ -6,13 +6,13 @@ module.exports = {
             if (word.toLowerCase() === phrase) {
                 var message = [
                   'This is the help',
-                  'Contribute here: https://github.com/jacebenson/cajonbot',
-                  'View leaderboard here: https://discord-cajon-bot.glitch.me/'
+                  'View leaderboard here: http://server.jace.pro/discord',
+                  'Contribute here: `https://github.com/jacebenson/cajonbot`'
                 ];
                 for (var thing in responses) {
                     message.push(responses[thing].help);
                 }
-                bot.createMessage(msg.channel.id, message.join('\n'));
+                msg.channel.send(message.join('\n'));
             }
         });
     },

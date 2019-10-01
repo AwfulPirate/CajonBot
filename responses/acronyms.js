@@ -1,17 +1,18 @@
 module.exports = {
     command: function(bot, msg) {
-        var phrases = ['!snprotips', '!prof', '!tips'];
+        var acronym = require('acronym');
+        var phrases = ['!ac', '!acronym', '!acromyn'];
         if (msg.author.bot === false) {
             var wordsArr = msg.content.split(' ');
             wordsArr.map(function(word, index) {
                 phrases.map(function(phrase) {
                     if (word.toLowerCase() === phrase) {
-                        var message = 'https://snprotips.com/search?q=' + encodeURI(wordsArr.join(' ').replace(word, '').trim());
+                        var message = acronym(wordsArr[index+1]);
                         msg.channel.send(message);
                     }
                 });
             });
         }
     },
-    help: '`!snprotips or !prof or !tips string` Searchs snprotips blog for the string provided.'
+    help: '`!acronym` test or `!ac` test'
 };

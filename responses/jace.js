@@ -6,8 +6,8 @@ module.exports = {
             wordsArr.map(function(word, index) {
                 if (word.toLowerCase() === phrase) {
                     var term = wordsArr[index + 1];
-                    var message = 'https://blog.jacebenson.com/' + encodeURI(wordsArr.join(' ').replace(word, '').trim());
-                    bot.createMessage(msg.channel.id, message);
+                    var message = 'https://jace.pro/?q=' + encodeURI(wordsArr.join(' ').replace(word, '').trim());
+                    msg.channel.send(message);
                 }
             });
         }

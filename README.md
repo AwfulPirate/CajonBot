@@ -1,6 +1,6 @@
-# CajonBot
+# CajonBot 
 
-> Simple bot for handling messages
+> A Discord bot for handling messages
 
 I wanted to replicate some code used in a Slack channel, this is that replication in the works.
 
@@ -14,6 +14,7 @@ outputs
 
 ```
 This is the help
+!acronym word makes an acronym for word given
 !bang @person Supportive text for an overworked employee.
 !clap some sentence Caps lock and clap backs.
 !docs string Searchs the ServiceNow docs for the string provided.
@@ -34,6 +35,9 @@ This is the help
 1. Fork it (https://github.com/jacebenson/cajonbot/fork)
 1. Create your feature branch (git checkout -b feature/fooBar)
 1. Commit your changes (git commit -am 'Add some fooBar')
+1. To Test, run `node chat` 
+   - Open http://localhost:3000
+   - Enter your commands to test
 1. Push to the branch (git push origin feature/fooBar)
 1. Create a new Pull Request
 
@@ -41,6 +45,10 @@ This is the help
 I'd copy `./responses/snprotips.js` if you need multiple phrases to look for, otherwise, I'd copy `./responses/docs.js`
 
 In those you'll have a `modules.exports` that has a `command`, and `help`.  Those are all that's needed to make this work.  You have access to all the Eris things via the `bot` variable and all the message things via the `msg` variable.
+
+## Installing on a Discord server;
+
+Use [this](https://discordapp.com/oauth2/authorize?&client_id=490235035627028511&scope=bot&permissions=0) link to install this on your workspace.
 
 ## Acknowledgments
 

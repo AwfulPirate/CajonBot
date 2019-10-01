@@ -5,19 +5,44 @@ module.exports = {
             var wordsArr = msg.content.split(' ');
             wordsArr.map(function(word, index) {
                 if (word.toLowerCase() === phrase) {
-                    msg.addReaction('💯'); //now geting error unknown emoji
-                    msg.addReaction('😅');
-                    /*var msgs = bot.getMessages(msg.channel.id, 100).then(function(messages){
-                      messages.map(function(message){
-                        console.log('Deleting "'+message.content+'"');
-                      bot.deleteMessage(msg.channel.id, message.id, 'Test Delete Content');
-                      });
+                    var url = msg.content.replace(phrase, '').trim();
+                    var https;
+                    if(url.indexOf('https')>=0){
+                        https = require('https');
+                    } else if(url.indexOf('http')>=0){
+                        https = require('http');        
+                    } else {
+                        https = require('https');
+                        url = 'https://' + url;
+                    }
+                    var URL = require('url').URL;
+                    //var myURL = new URL('http://www.example.com/foo?bar=1#main');
+                    var url = new URL(url);
+                    var options = {
+                        timeout: 3000,
+                        host: url.host,
+                        path: url.pathname
+                    }
+                    https.get(options, (resp) => {
+                        var data = '';
+                        resp.on('data', (chunk) => {
+                            data += chunk;
+                        });
+                        // The whole response has been received. Print out the result.
+                        resp.on('end', () => {
+                            //console.log(JSON.parse(data).explanation);
+                            var message = "`" + url + "` has a status of " + resp.statusCode;
+                            if(resp.statusCode === 200){
+                                message = "`" + url + "` is up with a status of " + resp.statusCode;
+                            }
+                            msg.channel.send(message);
+                        });
+                    }).on("error", (err) => {
+                        msg.channel.send("Error: `" + err.message + "`");
                     });
-                    bot.deleteMessage(msg.channel.id, msg.id, 'Test Delete Content');
-                    */
                 }
             });
         }
     },
-    help: '`!ping` test ....'
+    help: '`!ping` `google.com`'
 };
